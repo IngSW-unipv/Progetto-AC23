@@ -8,6 +8,30 @@ public class Portafoglio {
 	private ArrayList <Double> spese;
 	private ArrayList <Double> accrediti;
 
+	public double getSaldo() {
+		return saldo;
+	}
+
+	public void setSaldo(double saldo) {
+		this.saldo = saldo;
+	}
+
+	public ArrayList<Double> getSpese() {
+		return spese;
+	}
+
+	public void setSpese(ArrayList<Double> spese) {
+		this.spese = spese;
+	}
+
+	public ArrayList<Double> getAccrediti() {
+		return accrediti;
+	}
+
+	public void setAccrediti(ArrayList<Double> accrediti) {
+		this.accrediti = accrediti;
+	}
+
 	public Portafoglio() {
 	}
 
@@ -32,7 +56,5 @@ public class Portafoglio {
 	//Inizializzare PF nel database
 	// tabella utenti e tabella transazione
 	//pattern per fare cose con database si chiama DAO
-
-
 
 }

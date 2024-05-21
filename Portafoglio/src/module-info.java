@@ -6,4 +6,5 @@
  *
  */
 module Portafoglio {
+	requires java.sql;
 }
