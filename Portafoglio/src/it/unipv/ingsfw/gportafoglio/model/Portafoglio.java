@@ -1,7 +1,37 @@
-package Portafoglio;
+package it.unipv.ingsfw.gportafoglio.model;
 
 import java.util.ArrayList;
+import java.util.Date;
 
+public class Portafoglio {
+    private double saldo;
+    private ArrayList<Transazione> transazioni;
+
+    public Portafoglio(double saldo, ArrayList<Transazione> transazioni) {
+        this.saldo = saldo;
+        this.transazioni = transazioni;
+    }
+
+    public double getSaldo() {
+        return saldo;
+    }
+
+    public void spesa(double valore, String motivo) {
+        saldo -= valore;
+        transazioni.add(new Transazione(valore, motivo, new Date(), "spesa"));
+    }
+
+    public void accredito(double valore, String motivo) {
+        saldo += valore;
+        transazioni.add(new Transazione(valore, motivo, new Date(), "accredito"));
+    }
+
+    public ArrayList<Transazione> getTransazioni() {
+        return transazioni;
+    }
+}
+
+/*
 public class Portafoglio {
 
 	private double saldo;
@@ -52,9 +82,5 @@ public class Portafoglio {
 		accrediti.add(valore);
 	}
 
-	
-	//Inizializzare PF nel database
-	// tabella utenti e tabella transazione
-	//pattern per fare cose con database si chiama DAO
-
 }
+*/
