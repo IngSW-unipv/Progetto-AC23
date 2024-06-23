@@ -22,7 +22,7 @@ public class MainApp {
 //    		log.toString();
 //    	}
     	
-//    	MainFrame prova = new MainFrame();
+	MainFrame prova = new MainFrame();
     }
 }
 
