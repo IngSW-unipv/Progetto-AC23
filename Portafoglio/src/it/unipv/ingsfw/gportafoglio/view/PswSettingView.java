@@ -13,30 +13,33 @@ import javax.swing.JTextField;
 public class PswSettingView extends JFrame{
 
 	private static final long serialVersionUID = 1L;
-	private boolean unlocked;
+	private boolean login;
 	private JTextField usr;
 	private JTextField psw;
 	private JTextField psw2;
 	private JButton confirmButton;
+	private JButton switchViewButton;
 	
 	public PswSettingView() throws HeadlessException {
 		super();
-		this.unlocked = false;
+		this.login = false;
 		initComponents();
 	}
 
 	public PswSettingView(String title) throws HeadlessException {
 		super(title);
-		this.unlocked = false;
+		this.login = false;
 		initComponents();
 	}
 
 	private void initComponents() {
 		
+		
 		JLabel userLabel = new JLabel("Username");
 		JLabel passwordLabel = new JLabel("Password");
 		JLabel repeatPswLabel = new JLabel("Ripeti");
 		confirmButton=new JButton("Conferma");
+		switchViewButton = new JButton("Login");
 		
 		Container mainPane = getContentPane();
 		mainPane.setLayout(null);
@@ -51,6 +54,7 @@ public class PswSettingView extends JFrame{
 	    passwordLabel.setBounds(50,150,100,30);
 	    repeatPswLabel.setBounds(50, 220, 100, 30);
 	    confirmButton.setBounds(50,290,100,30);
+	    switchViewButton.setBounds(50,360,100,30);
 	    confirmButton.setSelected(true);
 		
 	    mainPane.add(usr);
@@ -60,6 +64,7 @@ public class PswSettingView extends JFrame{
 	    mainPane.add(passwordLabel);
 	    mainPane.add(repeatPswLabel);
 	    mainPane.add(confirmButton);
+	    mainPane.add(switchViewButton);
 		
 		Toolkit kit = Toolkit.getDefaultToolkit(); 
 		Dimension screenSize = kit.getScreenSize(); 
@@ -74,12 +79,12 @@ public class PswSettingView extends JFrame{
 		
 	}
 
-	public boolean isUnlocked() {
-		return unlocked;
+	public boolean isAlreadyLogged() {
+		return login;
 	}
 
-	public void setUnlocked(boolean unlocked) {
-		this.unlocked = unlocked;
+	public void setAlreadyLogged(boolean unlocked) {
+		this.login = unlocked;
 	}
 
 	public JTextField getUsr() {
@@ -96,5 +101,8 @@ public class PswSettingView extends JFrame{
 
 	public JButton getConfirmButton() {
 		return confirmButton;
+	}
+	public JButton getSwitchViewButton() {
+		return switchViewButton;
 	}
 }

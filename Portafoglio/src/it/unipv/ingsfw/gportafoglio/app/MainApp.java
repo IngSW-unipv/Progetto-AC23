@@ -1,17 +1,31 @@
 package it.unipv.ingsfw.gportafoglio.app;
 
-import it.unipv.ingsfw.gportafoglio.view.LogInView;
-import it.unipv.ingsfw.gportafoglio.view.MainFrame;
-import it.unipv.ingsfw.gportafoglio.view.PswSettingView;
+import it.unipv.ingsfw.gportafoglio.controller.*;
+import it.unipv.ingsfw.gportafoglio.view.*;
 
 public class MainApp {
     public static void main(String[] args) {
     	
-    	MainFrame prova = new MainFrame();
-    	LogInView log = new LogInView();
+//    	MainFrame prova = new MainFrame();
+//    	LogInView log = new LogInView();
+    	
     	PswSettingView psw = new PswSettingView();
+    	SetLoginController setContr = new SetLoginController(psw);
+    	
+    	while(!psw.isAlreadyLogged()) {
+    		psw.toString();
     	}
-    }
+//    	LogInView log = new LogInView();
+//    	LoginController logContr = new LoginController(log);
+//    	
+//    	while(!log.isUnlocked()) {
+//    		log.toString();
+//    	}
+    	
+    	MainFrame prova = new MainFrame();
+    }
+}
+
 /*
 public class MainApp {
     public static void main(String[] args) {

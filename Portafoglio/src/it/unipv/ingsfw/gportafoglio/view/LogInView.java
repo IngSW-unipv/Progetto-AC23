@@ -33,7 +33,6 @@ public class LogInView extends JFrame {
 		
 		JLabel userLabel = new JLabel("Username");
 		JLabel passwordLabel = new JLabel("Password");
-		//JLabel iconLabel = new JLabel(new ImageIcon(getClass().getResource("\"C:\\Users\\migue\\OneDrive\\Desktop\\SecShield.png\"")));
 		loginButton=new JButton("Login");
 	    resetButton=new JButton("Svuota");
 		

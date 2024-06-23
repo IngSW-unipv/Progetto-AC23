@@ -36,8 +36,8 @@ public class SetLoginController {
 					JOptionPane.showMessageDialog(new JFrame(),"Le password non corrispondono", null, JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					try (OutputStream output = new FileOutputStream(".properties/psw.properties")) {
-
+					try (OutputStream output = new FileOutputStream(".properties/psw.properties")) { // TODO add query to save username and password
+																								
 			            Properties prop = new Properties();
 
 			            prop.setProperty("usr", ((Integer)usr.hashCode()).toString());
@@ -50,6 +50,7 @@ public class SetLoginController {
 			        } catch (IOException io) {
 			            io.printStackTrace();
 			        }
+					view.setAlreadyLogged(true);
 					view.dispose();
 				}
 			}
@@ -132,5 +133,19 @@ public class SetLoginController {
 			
 		};
 		view.getPsw().addKeyListener(enterPsw1Listener);
-	}
+		
+		ActionListener switchListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+					
+//					JOptionPane.showInputDialog(new JFrame(), "inserisci importo", null, JOptionPane.QUESTION_MESSAGE);
+					view.setAlreadyLogged(true);
+					view.dispose();
+			}
+			
+		};
+		view.getSwitchViewButton().addActionListener(switchListener);
+	}	
+	
 }

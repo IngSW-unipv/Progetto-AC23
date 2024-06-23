@@ -30,7 +30,7 @@ public class LoginController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String usr = "";
+				String usr = "";								//TODO replace with db queries
 				String psw = "";
 				
 			
