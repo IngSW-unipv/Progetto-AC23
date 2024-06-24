@@ -1,16 +1,16 @@
-package it.unipv.ingsfw.gportafoglio.service;
+package it.unipv.ingsfw.gportafoglio.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
 
-public class DbController {
+public class DbConnection {
     private String url = "jdbc:mysql://localhost:3306/databaseportafoglio";
     private String username = "root";
     private String password = "";
     private Connection connection;
 
-    public DbController() {
+    public DbConnection() {
         try {
             connection = DriverManager.getConnection(url, username, password);
             System.out.println("Connessione al database avvenuta con successo!");

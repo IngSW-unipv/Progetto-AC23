@@ -6,7 +6,6 @@ import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.*;
 import it.unipv.ingsfw.gportafoglio.dao.*;
-import it.unipv.ingsfw.gportafoglio.service.DbController;
 
 public class SetLoginController {
 
@@ -34,12 +33,13 @@ public class SetLoginController {
 					JOptionPane.showMessageDialog(new JFrame(),"Le password non corrispondono", null, JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-						DbController connection = new DbController();
+						DbConnection connection = new DbConnection();
 						PortafoglioDAOImpl daoI = PortafoglioDAOImpl.getInstance(connection.getConnection());
 						daoI.createPortafoglio(username, password);
+						view.setAlreadyLogged(true);
+						view.dispose();
 			        }
-					view.setAlreadyLogged(true);
-					view.dispose();
+					
 				}
 			
 		};

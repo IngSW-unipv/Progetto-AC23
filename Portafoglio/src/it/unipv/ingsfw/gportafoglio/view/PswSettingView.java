@@ -53,8 +53,8 @@ public class PswSettingView extends JFrame{
 		userLabel.setBounds(50,80,100,30);
 	    passwordLabel.setBounds(50,150,100,30);
 	    repeatPswLabel.setBounds(50, 220, 100, 30);
-	    confirmButton.setBounds(50,290,100,30);
-	    switchViewButton.setBounds(50,360,100,30);
+	    confirmButton.setBounds(150,290,100,30);
+	    switchViewButton.setBounds(150,360,100,30);
 	    confirmButton.setSelected(true);
 		
 	    mainPane.add(usr);
@@ -72,7 +72,7 @@ public class PswSettingView extends JFrame{
 		int screenWidth = screenSize.width; 
 //		setSize(screenWidth/4,2*screenHeight/5); 
 		this.setBounds(10,10,370,440);
-		setLocation(screenWidth/4,screenHeight/4);
+		setLocation(screenWidth/2-185,screenHeight/2-220);
 		setVisible(true);
 		this.setDefaultCloseOperation(EXIT_ON_CLOSE);
 		this.setResizable(false);

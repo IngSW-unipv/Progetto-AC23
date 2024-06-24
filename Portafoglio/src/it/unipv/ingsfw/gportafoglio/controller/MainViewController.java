@@ -1,6 +1,6 @@
 package it.unipv.ingsfw.gportafoglio.controller;
 
-import it.unipv.ingsfw.gportafoglio.service.GestionePortafoglio;
+import it.unipv.ingsfw.gportafoglio.model.GestionePortafoglio;
 import it.unipv.ingsfw.gportafoglio.view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

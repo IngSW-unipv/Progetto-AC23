@@ -1,7 +1,6 @@
-package it.unipv.ingsfw.gportafoglio.service;
+package it.unipv.ingsfw.gportafoglio.model;
 
 import it.unipv.ingsfw.gportafoglio.dao.*;
-import it.unipv.ingsfw.gportafoglio.model.*;
 
 public class GestionePortafoglio implements AutoCloseable {
     private String username;

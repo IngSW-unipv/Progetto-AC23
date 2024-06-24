@@ -1,8 +1,8 @@
 package it.unipv.ingsfw.gportafoglio.controller;
 
+import it.unipv.ingsfw.gportafoglio.dao.DbConnection;
 import it.unipv.ingsfw.gportafoglio.dao.PortafoglioDAOImpl;
-import it.unipv.ingsfw.gportafoglio.service.DbController;
-import it.unipv.ingsfw.gportafoglio.service.GestionePortafoglio;
+import it.unipv.ingsfw.gportafoglio.model.GestionePortafoglio;
 import it.unipv.ingsfw.gportafoglio.view.LogInView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -42,7 +42,7 @@ public class LoginController {
 				int password = view.getPsw().getText().hashCode();
 				System.out.println(""+password);
 				
-				DbController connection = new DbController();
+				DbConnection connection = new DbConnection();
 				PortafoglioDAOImpl daoI = PortafoglioDAOImpl.getInstance(connection.getConnection());
 				
 				model = new GestionePortafoglio(username, "" + password, daoI);

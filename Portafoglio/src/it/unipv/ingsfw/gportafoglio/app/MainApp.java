@@ -1,8 +1,8 @@
 package it.unipv.ingsfw.gportafoglio.app;
 
 import it.unipv.ingsfw.gportafoglio.controller.SetLoginController;
-import it.unipv.ingsfw.gportafoglio.service.DbController;
-import it.unipv.ingsfw.gportafoglio.service.GestionePortafoglio;
+import it.unipv.ingsfw.gportafoglio.dao.DbConnection;
+import it.unipv.ingsfw.gportafoglio.model.GestionePortafoglio;
 import it.unipv.ingsfw.gportafoglio.view.LogInView;
 import it.unipv.ingsfw.gportafoglio.view.MainFrame;
 import it.unipv.ingsfw.gportafoglio.view.PswSettingView;
@@ -26,7 +26,7 @@ public class MainApp {
     		log.toString();
     	}
     	
-    	DbController connection = new DbController();
+    	DbConnection connection = new DbConnection();
     	GestionePortafoglio model = logContr.getModel();
     	
     	MainFrame main = new MainFrame();
