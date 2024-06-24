@@ -1,16 +1,9 @@
 package it.unipv.ingsfw.gportafoglio.controller;
 
-import it.unipv.ingsfw.gportafoglio.model.*;
 import it.unipv.ingsfw.gportafoglio.service.GestionePortafoglio;
 import it.unipv.ingsfw.gportafoglio.view.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.KeyEvent;
-import java.awt.event.KeyListener;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -22,6 +15,8 @@ public class MainViewController {
 	public MainViewController(MainFrame view, GestionePortafoglio model) {
 		this.view = view;
 		this.model = model;
+		this.view.setTitle("Bentornato "+ model.getUsername());
+		this.view.getSaldoTitle().setText("IL TUO SALDO: "+ this.model.getPortafoglio().getSaldo() + " EURO");
 		addListeners();
 		
 	}
@@ -37,6 +32,49 @@ public class MainViewController {
 			
 		};
 		view.getStampaTransazioniButton().addActionListener(stampaTransazioniListener);
+		
+		ActionListener AccreditaButtonListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String stringaImporto =  JOptionPane.showInputDialog(new JFrame(),"Inserisci importo (€)", null, JOptionPane.QUESTION_MESSAGE);
+				String causale =  JOptionPane.showInputDialog(new JFrame(),"Inserisci la causale", null, JOptionPane.QUESTION_MESSAGE);
+				stringaImporto = stringaImporto.replace(",",".");
+				double importo =  Double.parseDouble(stringaImporto);
+				model.aggiungiAccredito(importo, causale);
+				view.getSaldoTitle().setText("IL TUO SALDO: "+ model.getPortafoglio().getSaldo() + " EURO");
+			}
+			
+		};
+		view.getAccreditaButton().addActionListener(AccreditaButtonListener);
+		
+		ActionListener SpesaButtonListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				String stringaImporto =  JOptionPane.showInputDialog(new JFrame(),"Inserisci importo (€)", null, JOptionPane.QUESTION_MESSAGE);
+				String causale =  JOptionPane.showInputDialog(new JFrame(),"Inserisci la causale", null, JOptionPane.QUESTION_MESSAGE);
+				stringaImporto = stringaImporto.replace(",",".");
+				double importo =  Double.parseDouble(stringaImporto);
+				model.aggiungiSpesa(importo, causale);
+				view.getSaldoTitle().setText("IL TUO SALDO: "+ model.getPortafoglio().getSaldo() + " EURO");
+			}
+			
+		};
+		view.getSpesaButton().addActionListener(SpesaButtonListener);
+		
+		ActionListener EsciButtonListener = new ActionListener() {
+
+			@Override
+			public void actionPerformed(ActionEvent e) {
+				// TODO Auto-generated method stub
+				System.exit(0);
+			}
+			
+		};
+		view.getEsciButton().addActionListener(EsciButtonListener);
 	}
 
 }

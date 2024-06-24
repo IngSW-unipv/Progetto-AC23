@@ -38,7 +38,6 @@ public class LogInView extends JFrame {
 		
 		Container mainPane = getContentPane();
 		mainPane.setLayout(null);
-//		mainPane.setBorder(BorderFactory.createLineBorder(Color.decode("#4f4f4f"), ABORT));
 		usr = new JTextField();
 		usr.setBounds(170,180,150,30);
 		psw = new JPasswordField();

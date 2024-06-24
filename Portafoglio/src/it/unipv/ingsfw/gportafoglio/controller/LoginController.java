@@ -1,14 +1,13 @@
 package it.unipv.ingsfw.gportafoglio.controller;
 
+import it.unipv.ingsfw.gportafoglio.dao.PortafoglioDAOImpl;
+import it.unipv.ingsfw.gportafoglio.service.DbController;
+import it.unipv.ingsfw.gportafoglio.service.GestionePortafoglio;
 import it.unipv.ingsfw.gportafoglio.view.LogInView;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.KeyEvent;
 import java.awt.event.KeyListener;
-import java.io.FileInputStream;
-import java.io.IOException;
-import java.io.InputStream;
-import java.util.Properties;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 
@@ -16,7 +15,16 @@ import javax.swing.JOptionPane;
 public class LoginController {
 
 	private LogInView view;
+	private GestionePortafoglio model;
 	
+	public LogInView getView() {
+		return view;
+	}
+
+	public GestionePortafoglio getModel() {
+		return model;
+	}
+
 	public LoginController(LogInView view) {
 		this.view = view;
 		addListeners();
@@ -30,24 +38,16 @@ public class LoginController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String usr = "";								//TODO replace with db queries
-				String psw = "";
+				String username = view.getUsr().getText();								//TODO replace with db queries
+				int password = view.getPsw().getText().hashCode();
+				System.out.println(""+password);
 				
-			
-				try (InputStream input = new FileInputStream(".properties/psw.properties")) {
-
-		            Properties prop = new Properties();
-
-		            prop.load(input);
-
-		            usr = prop.getProperty("usr");
-					psw = prop.getProperty("psw");
-
-		        } catch (IOException ex) {
-		            ex.printStackTrace();
-		        }
+				DbController connection = new DbController();
+				PortafoglioDAOImpl daoI = PortafoglioDAOImpl.getInstance(connection.getConnection());
 				
-				if( (view.getUsr().getText().hashCode()==Integer.parseInt(usr)) && (view.getPsw().getText().hashCode() == Integer.parseInt(psw))) {
+				model = new GestionePortafoglio(username, "" + password, daoI);
+				System.out.println(model.getUsername());
+				if(model.getPortafoglio() != null) {
 					view.setUnlocked(true);
 					view.dispose();
 				}

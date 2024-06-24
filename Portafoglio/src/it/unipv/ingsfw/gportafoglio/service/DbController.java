@@ -1,7 +1,5 @@
 package it.unipv.ingsfw.gportafoglio.service;
 
-import it.unipv.ingsfw.gportafoglio.dao.PortafoglioDAOImpl;
-
 import java.sql.Connection;
 import java.sql.DriverManager;
 import java.sql.SQLException;
@@ -21,9 +19,10 @@ public class DbController {
         }
     }
 
-    public PortafoglioDAOImpl getPortafoglioDAO() {
-        return new PortafoglioDAOImpl(connection);
-    }
+    public Connection getConnection() {
+		return connection;
+	}
+    
     
     public void closeConnection() {
         if (connection != null) {
@@ -37,32 +36,3 @@ public class DbController {
     }
 
 }
-
-
-/*public class DbController {
-
-	private String url;
-	private String username;
-	private String password;
-	
-	private Connection conn;
-
-	public DbController() {
-		url = "jdbc:mysql://localhost:3306/databaseportafoglio";
-		username = "root";
-		password = "";
-		try (Connection conn = DriverManager.getConnection(url, username, password)){
-			System.out.println("Connessione avvenuta con successo!");
-			this.conn = conn;
-		}	
-		catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
-	
-    public PortafoglioDAOImpl getPortafoglioDAO() throws SQLException {
-    	conn = DriverManager.getConnection(url, username, password);
-        return new PortafoglioDAOImpl();
-    }
-
-}*/

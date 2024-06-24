@@ -7,14 +7,17 @@ import java.util.List;
 
 public class PortafoglioDAOImpl implements PortafoglioDAO {
 	private Connection connection;
+	private static PortafoglioDAOImpl instance;
 
-	public PortafoglioDAOImpl(Connection connection) {
+	private PortafoglioDAOImpl(Connection connection) {
 		this.connection = connection;
 	}
+	
+	
 
 	@Override
 	public Portafoglio getPortafoglioByUsername(String username, String password) {
-		String querySaldo = "SELECT saldo FROM utenti WHERE username = ?";
+		String querySaldo = "SELECT saldo FROM utenti WHERE username = ? AND password = ?";
 		String queryTransazioni = "SELECT valore, motivo, data, tipo FROM transazioni WHERE username = ?";
 
 		double saldo = 0.0;
@@ -23,11 +26,12 @@ public class PortafoglioDAOImpl implements PortafoglioDAO {
 		try {
 			try (PreparedStatement stmtSaldo = connection.prepareStatement(querySaldo)) {
 				stmtSaldo.setString(1, username);
+				stmtSaldo.setString(2, password);
 				try (ResultSet rsSaldo = stmtSaldo.executeQuery()) {
 					if (rsSaldo.next()) {
 						saldo = rsSaldo.getDouble("saldo");
 					} else {
-						createPortafoglio(username);
+						return null;
 					}
 				}
 			}
@@ -50,17 +54,7 @@ public class PortafoglioDAOImpl implements PortafoglioDAO {
 
 		return new Portafoglio(saldo, transazioni);
 	}
-
-	@Override
-	public void createPortafoglio(String username) {
-		String insertUser = "INSERT INTO utenti (username, saldo) VALUES (?, 0)";
-		try (PreparedStatement stmtInsertUser = connection.prepareStatement(insertUser)) {
-			stmtInsertUser.setString(1, username);
-			stmtInsertUser.executeUpdate();
-		} catch (SQLException e) {
-			e.printStackTrace();
-		}
-	}
+	
 
 	@Override
 	public void updatePortafoglio(String username, Portafoglio portafoglio) {
@@ -159,15 +153,27 @@ public class PortafoglioDAOImpl implements PortafoglioDAO {
 		// TODO Auto-generated method stub
 		return null;
 	}
-}
-//	@Override
-//	public void createPortafoglio(String username, String password) {
-//		// TODO Auto-generated method stub
-		
-//	}
 
-//	@Override
-//	public void updatePortafoglio(String username, String password, Portafoglio portafoglio) {
-//		// TODO Auto-generated method stub
-		
-//	}
+	@Override
+	public void createPortafoglio(String username, String password) {
+	    String insertUser = "INSERT INTO utenti (username, password, saldo) VALUES (?, ?, ?)";
+	    try (PreparedStatement stmtInsertUser = connection.prepareStatement(insertUser)) {
+	        stmtInsertUser.setString(1, username);
+	        stmtInsertUser.setString(2, ""+password.hashCode());  // Utilizzo hashCode per semplificare l'esempio
+	        stmtInsertUser.setInt(3, 0);  // Imposta saldo iniziale a 0
+
+	        System.out.println(stmtInsertUser);  // Stampa il PreparedStatement per il debug
+	        stmtInsertUser.executeUpdate();
+	    } catch (SQLException e) {
+	        e.printStackTrace();
+	    }
+	}
+
+
+	public static PortafoglioDAOImpl getInstance(Connection connection) {
+		if (instance == null) {
+			instance = new PortafoglioDAOImpl(connection);
+		}
+		return instance;
+	}
+}

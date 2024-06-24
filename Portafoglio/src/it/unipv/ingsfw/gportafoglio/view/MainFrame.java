@@ -41,6 +41,7 @@ public class MainFrame extends JFrame {
 		stampaTransazioniButton = new JButton("Stampa transazioni");
 		logArea = new JTextArea();
 		logArea.setEditable(false);
+		logArea.setFont(new java.awt.Font("Arial", 0, 20));
 		esciButton = new JButton("Esci");
 
 		

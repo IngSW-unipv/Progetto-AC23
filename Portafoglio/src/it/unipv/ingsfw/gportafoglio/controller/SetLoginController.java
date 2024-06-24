@@ -5,10 +5,8 @@ import it.unipv.ingsfw.gportafoglio.view.*;
 import javax.swing.JFrame;
 import javax.swing.JOptionPane;
 import java.awt.event.*;
-import java.io.FileOutputStream;
-import java.io.IOException;
-import java.io.OutputStream;
-import java.util.Properties;
+import it.unipv.ingsfw.gportafoglio.dao.*;
+import it.unipv.ingsfw.gportafoglio.service.DbController;
 
 public class SetLoginController {
 
@@ -26,34 +24,24 @@ public class SetLoginController {
 			@Override
 			public void actionPerformed(ActionEvent e) {
 				
-				String usr = view.getUsr().getText();
-				String psw = view.getPsw().getText();
+				String username = view.getUsr().getText();
+				String password = view.getPsw().getText();
 				
-				if(usr.equals("") || psw.equals("")) {
+				if(username.equals("") || password.equals("")) {
 					JOptionPane.showMessageDialog(new JFrame(),"La password e il nome utente non possono essere vuoti", null, JOptionPane.ERROR_MESSAGE);
 				}
-				else if(!view.getPsw2().getText().equals(psw)) {
+				else if(!view.getPsw2().getText().equals(password)) {
 					JOptionPane.showMessageDialog(new JFrame(),"Le password non corrispondono", null, JOptionPane.ERROR_MESSAGE);
 				}
 				else {
-					try (OutputStream output = new FileOutputStream(".properties/psw.properties")) { // TODO add query to save username and password
-																								
-			            Properties prop = new Properties();
-
-			            prop.setProperty("usr", ((Integer)usr.hashCode()).toString());
-			            prop.setProperty("psw", ((Integer)psw.hashCode()).toString());
-
-			            prop.store(output, null);
-
-			            System.out.println(prop);
-
-			        } catch (IOException io) {
-			            io.printStackTrace();
+						DbController connection = new DbController();
+						PortafoglioDAOImpl daoI = PortafoglioDAOImpl.getInstance(connection.getConnection());
+						daoI.createPortafoglio(username, password);
 			        }
 					view.setAlreadyLogged(true);
 					view.dispose();
 				}
-			}
+			
 		};
 		view.getConfirmButton().addActionListener(confirmListener);
 		
